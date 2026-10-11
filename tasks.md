@@ -6,8 +6,9 @@ Ky dokument paraqet ndarjen e detyrave për fazën e përpunimit dhe përgatitje
 
 | Task                                                       | Assigned To | Finished |
 | ---------------------------------------------------------- | ----------- | -------- |
-| Duplicate identification and removal                       | F           | [ ]      |
+| Format standardization                                     | F           | [x]      |
 | Missing value identification, treatment strategy, handling | B           | [ ]      |
+| Duplicate identification and removal                       | F           | [ ]      |
 | Dataset integration & Data aggregation                     | E           | [ ]      |
 | Data sampling                                              | F           | [ ]      |
 | Feature relationship analysis                              | B           | [ ]      |
