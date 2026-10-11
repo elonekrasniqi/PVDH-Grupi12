@@ -1,1 +1,2 @@
 dataset/synthetic_fraud_data.csv filter=lfs diff=lfs merge=lfs -text
+dataset/phase_1/1F_FORMAT_STANDARDIZED_DATASET.csv filter=lfs diff=lfs merge=lfs -text
