@@ -8,9 +8,9 @@ from collections import defaultdict
 from collections.abc import Iterable
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent
-DEFAULT_INPUT = ROOT / "dataset" / "phase_1" / "1F_FORMAT_STANDARDIZED_DATASET.csv"
-DEFAULT_OUTPUT = ROOT / "dataset" / "phase_1" / "2B_MISSING_VALUES_HANDLED_DATASET.csv"
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+DEFAULT_INPUT = PROJECT_ROOT / "dataset" / "phase_1" / "1F_FORMAT_STANDARDIZED_DATASET.csv"
+DEFAULT_OUTPUT = PROJECT_ROOT / "dataset" / "phase_1" / "2B_MISSING_VALUES_HANDLED_DATASET.csv"
 NULL_TOKENS = {"", "na", "n/a", "nan", "null", "none", "?"}
 NUMERIC_COLUMNS = ("amount", "distance_from_home", "transaction_hour")
 CATEGORICAL_COLUMNS = ("currency", "merchant_category", "card_type", "channel")
