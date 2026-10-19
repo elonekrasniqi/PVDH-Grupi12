@@ -9,7 +9,7 @@ Ky dokument paraqet ndarjen e detyrave për fazën e përpunimit dhe përgatitje
 | Format standardization                                     | F           | [x]      |
 | Missing value identification, treatment strategy, handling | B           | [x]      |
 | Duplicate identification and removal                       | F           | [x]      |
-| Dataset integration & Data aggregation                     | E           | [ ]      |
+| Dataset integration & Data aggregation                     | E           | [X]      |
 | Data sampling                                              | F           | [ ]      |
 | Feature relationship analysis                              | B           | [ ]      |
 | Feature subset selection                                   | B           | [ ]      |
