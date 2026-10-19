@@ -218,3 +218,5 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+dataset/phase_1/4F_INTEGRATED_DATASET.csv
