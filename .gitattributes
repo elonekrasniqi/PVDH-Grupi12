@@ -3,3 +3,4 @@ dataset/phase_1/1F_FORMAT_STANDARDIZED_DATASET.csv filter=lfs diff=lfs merge=lfs
 dataset/phase_1/2B_MISSING_VALUES_HANDLED_DATASET.csv filter=lfs diff=lfs merge=lfs -text
 dataset/phase_1/3F_DUPLICATES_REPORT.csv filter=lfs diff=lfs merge=lfs -text
 dataset/phase_1/3F_DUPLICATES_REMOVED_DATASET.csv filter=lfs diff=lfs merge=lfs -text
+dataset/phase_1/4F_INTEGRATED_DATASET.csv filter=lfs diff=lfs merge=lfs -text
