@@ -1,0 +1,38 @@
+{
+  "input": "C:\\Users\\ADMIN\\OneDrive\\Documents\\GitHub\\PVDH-Grupi12\\dataset\\phase_1\\6B_FEATURE_SUBSET_DATASET.csv",
+  "seed": 42,
+  "test_fraction": 0.2,
+  "train_rows": 31997,
+  "test_rows": 8000,
+  "input_feature_count": 5,
+  "encoded_feature_count": 49,
+  "pca_component_count": 13,
+  "variance_threshold": 0.95,
+  "total_explained_variance": 0.9646461478483931,
+  "explained_variance_per_component": [
+    0.38513430975461665,
+    0.2635110083324137,
+    0.05079681470106435,
+    0.03546079602330988,
+    0.0341898120359452,
+    0.03398055605255915,
+    0.02704357205664564,
+    0.024183895810334675,
+    0.022824159088017503,
+    0.02260022347128258,
+    0.022073784572680152,
+    0.021653366924600324,
+    0.02119384902492323
+  ],
+  "numeric_features": [
+    "distance_from_home",
+    "transaction_hour"
+  ],
+  "categorical_features": [
+    "country",
+    "city",
+    "city_size"
+  ],
+  "target_excluded_from_pca": true,
+  "note": "PCA is fitted only on the training partition; test is transformed without refitting."
+}

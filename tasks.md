@@ -13,7 +13,7 @@ Ky dokument paraqet ndarjen e detyrave për fazën e përpunimit dhe përgatitje
 | Data sampling                                              | F           | [x]      |
 | Feature relationship analysis                              | B           | [x]      |
 | Feature subset selection                                   | B           | [x]      |
-| Dimensionality reduction                                   | E           | [ ]      |
+| Dimensionality reduction                                   | E           | [x]      |
 | Feature creation                                           | F           | [ ]      |
 | Discretization & Binarization                              | F           | [ ]      |
 | Data transformation and normalization                      | B           | [ ]      |
