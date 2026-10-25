@@ -1,4 +1,3 @@
-"""Task E: leakage-safe dimensionality reduction of the selected fraud features."""
 from __future__ import annotations
 import argparse
 import csv

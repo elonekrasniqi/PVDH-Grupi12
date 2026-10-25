@@ -1,4 +1,4 @@
-"""Extended unit tests for Task E PCA.
+"""
 Run from project root: py -m unittest discover -s tests -p "test_dimensionality_reduction.py" -v
 """
 import importlib.util
