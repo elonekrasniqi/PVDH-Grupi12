@@ -14,7 +14,7 @@ Ky dokument paraqet ndarjen e detyrave për fazën e përpunimit dhe përgatitje
 | Feature relationship analysis                              | B           | [x]      |
 | Feature subset selection                                   | B           | [x]      |
 | Dimensionality reduction                                   | E           | [x]      |
-| Feature creation                                           | F           | [ ]      |
-| Discretization & Binarization                              | F           | [ ]      |
+| Feature creation                                           | F           | [x]      |
+| Discretization & Binarization                              | F           | [x]      |
 | Data transformation and normalization                      | B           | [ ]      |
 | README documentation                                       | E           | [ ]      |

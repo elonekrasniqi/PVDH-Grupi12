@@ -9,3 +9,5 @@ dataset/phase_1/5B_STRATIFIED_SAMPLE.csv filter=lfs diff=lfs merge=lfs -text
 dataset/phase_1/5C_SYSTEMATIC_SAMPLE.csv filter=lfs diff=lfs merge=lfs -text
 dataset/phase_1/5D_BALANCED_SAMPLE.csv filter=lfs diff=lfs merge=lfs -text
 dataset/phase_1/6B_FEATURE_SUBSET_DATASET.csv filter=lfs diff=lfs merge=lfs -text
+dataset/phase_1/6A_FEATURE_CREATION_DATASET.csv filter=lfs diff=lfs merge=lfs -text
+dataset/phase_1/6B_DISCRETIZED_BINARIZED_DATASET.csv filter=lfs diff=lfs merge=lfs -text
