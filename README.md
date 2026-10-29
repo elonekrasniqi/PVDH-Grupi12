@@ -1,8 +1,10 @@
 # PVDH-Grupi12
 
-## Phase I: feature analysis and selection
+## Phase I: feature analysis and selection (first version, on the sample)
 
-Run the Task B scripts from the repository root, in order:
+This was the first version, run on the stratified sample before the
+transformation step. It is replaced by the analysis on the transformed data
+further below (`6_4` / `6_5`). Run from the repository root, in order:
 
 ```powershell
 python .\src\phase_1\6_1_feature_relationship_analysis.py
@@ -42,3 +44,39 @@ It writes `6D_TRANSFORMED_NORMALIZED_DATASET.csv` and
 `6E_TRANSFORMATION_NORMALIZATION_REPORT.csv` (method, rows imputed, skew before
 and after, and the mean/std or min/range used, so the same scaling can be
 applied to new data). Tests: `python -m pytest tests/test_data_transformation_normalization.py`.
+
+## Phase I: feature relationship analysis and subset selection (on 6D)
+
+Run after the transformation step, from the repository root:
+
+```powershell
+python .\src\phase_1\6_4_feature_relationship_analysis.py
+python .\src\phase_1\6_5_feature_subset_selection.py
+```
+
+`6_4` reads `6D_TRANSFORMED_NORMALIZED_DATASET.csv` and lists every column in
+`6F_FEATURE_RELATIONSHIP_REPORT.csv`:
+
+- identifiers and raw columns already replaced by a transformed version are
+  marked `exclude_identifier` / `exclude_superseded`;
+- each candidate feature is measured against `is_fraud` (point-biserial for
+  numeric/binary, Cramér's V for categorical, mutual information for all) and
+  kept when |association| >= 0.05 (0.04 for Cramér's V) or mutual information
+  >= 0.01;
+- possible target leakage (a value with >= 100 rows that is always or never
+  fraud: `card_present`, `device`, `channel`), constant and high-cardinality
+  features are excluded;
+- relevant features are compared with each other (Spearman / Cramér's V); of a
+  pair with |relationship| >= 0.85 the one with lower mutual information is
+  dropped (for example `is_shared_device` vs `customers_per_device_minmax`,
+  `currency_resolved` vs `country`). The pairs are in
+  `6F_FEATURE_CORRELATION_PAIRS.csv`;
+- if all levels of a one-hot group are kept, the weakest one is dropped
+  (dummy-variable trap).
+
+`6_5` keeps exactly the features the report marks `retain`, copies the numeric
+ones as they are and one-hot encodes the categorical ones (the most frequent
+category is the reference level without a column). It writes
+`6G_FEATURE_SUBSET_DATASET.csv` (`transaction_id`, the features, `is_fraud`)
+and `6G_FEATURE_SUBSET_REPORT.csv` (where each column comes from).
+Tests: `python -m pytest tests/test_feature_analysis_selection_transformed.py`.

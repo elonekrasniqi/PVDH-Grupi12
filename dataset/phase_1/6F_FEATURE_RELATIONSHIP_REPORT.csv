@@ -1,0 +1,76 @@
+feature,feature_type,metric,association,mutual_information,valid_rows,levels,top_categories,potential_leakage,redundant_with,recommendation,notes
+amount_usd_log_z,numeric,point_biserial,-0.23487,0.177675,39997,31586,,,,retain,
+customer_avg_amount_usd_log_z,numeric,point_biserial,0.00497,2.3e-05,39997,5532,,,,exclude_low_association,
+velocity_total_amount_log_z,numeric,point_biserial,0.009747,0.000281,39997,39720,,,,exclude_low_association,
+customer_txn_count_z,numeric,point_biserial,-0.002948,0.0,39997,163,,,,exclude_low_association,
+velocity_num_transactions_z,numeric,point_biserial,0.008796,0.002443,39997,2489,,,,exclude_low_association,
+velocity_max_single_amount_z,numeric,point_biserial,0.007522,0.0,39997,13093,,,,exclude_low_association,
+velocity_unique_merchants_z,numeric,point_biserial,0.005386,0.0,39997,106,,,,exclude_low_association,
+velocity_unique_countries_z,numeric,point_biserial,0.001132,0.001406,39997,13,,,,exclude_low_association,
+customer_away_share_minmax,numeric,point_biserial,0.076989,0.0,39997,1285,,,,retain,
+customer_night_share_minmax,numeric,point_biserial,0.057023,0.00382,39997,968,,,,retain,
+customers_per_device_minmax,numeric,point_biserial,-0.370267,0.096328,39997,5,,,,retain,
+transaction_amount_category_code_minmax,numeric,point_biserial,0.030645,0.040161,39997,3,,,amount_usd_log_z,exclude_redundant,"spearman=0.943 with amount_usd_log_z, which has higher mutual information."
+transaction_frequency_category_code_minmax,numeric,point_biserial,0.005292,0.001628,39997,3,,,,exclude_low_association,
+customer_activity_level_code_minmax,numeric,point_biserial,-0.002836,0.001164,39997,3,,,,exclude_low_association,
+customer_spending_level_code_minmax,numeric,point_biserial,0.010288,0.004635,39997,3,,,,exclude_low_association,
+hour_sin,numeric,point_biserial,0.155595,0.027668,39997,13,,,,retain,
+hour_cos,numeric,point_biserial,0.295238,0.056139,39997,13,,,,retain,
+distance_from_home,binary,point_biserial,0.645803,0.212049,39997,2,"0.0:fraud_rate=0.027,n=26562; 1.0:fraud_rate=0.589,n=13435",,,retain,
+card_present,binary,point_biserial,0.611088,0.162102,39997,2,"0.0:fraud_rate=0.135,n=36278; 1.0:fraud_rate=1.000,n=3719",1.0,,exclude_possible_target_leakage,These values/categories are always or never fraud (>= 100 rows).
+high_risk_merchant,binary,point_biserial,-9.1e-05,0.0,39997,2,"0.0:fraud_rate=0.215,n=30040; 1.0:fraud_rate=0.215,n=9957",,,exclude_low_association,
+weekend_transaction,binary,point_biserial,,0.0,39997,1,"0.0:fraud_rate=0.215,n=39997",,,exclude_constant,
+currency_imputed,binary,point_biserial,-0.006261,2e-05,39997,2,"0.0:fraud_rate=0.216,n=38600; 1.0:fraud_rate=0.202,n=1397",,,exclude_low_association,
+amount_usd_invalid,binary,point_biserial,-0.002393,3e-06,39997,2,"0.0:fraud_rate=0.215,n=39679; 1.0:fraud_rate=0.204,n=318",,,exclude_low_association,
+is_shared_device,binary,point_biserial,-0.377472,0.082909,39997,2,"0.0:fraud_rate=0.353,n=22336; 1.0:fraud_rate=0.041,n=17661",,customers_per_device_minmax,exclude_redundant,"spearman=1.000 with customers_per_device_minmax, which has higher mutual information."
+card_brand_visa,binary,point_biserial,0.00185,2e-06,39997,2,"0.0:fraud_rate=0.215,n=29914; 1.0:fraud_rate=0.217,n=10083",,,exclude_low_association,
+card_brand_mastercard,binary,point_biserial,-0.00083,0.0,39997,2,"0.0:fraud_rate=0.216,n=29997; 1.0:fraud_rate=0.215,n=10000",,,exclude_low_association,
+card_brand_amex,binary,point_biserial,0.000675,0.0,39997,2,"0.0:fraud_rate=0.215,n=30056; 1.0:fraud_rate=0.216,n=9941",,,exclude_low_association,
+card_brand_discover,binary,point_biserial,-0.0017,1e-06,39997,2,"0.0:fraud_rate=0.216,n=30024; 1.0:fraud_rate=0.214,n=9973",,,exclude_low_association,
+time_period_night,binary,point_biserial,0.386848,0.066711,39997,2,"0.0:fraud_rate=0.126,n=30475; 1.0:fraud_rate=0.500,n=9522",,,retain,
+time_period_morning,binary,point_biserial,-0.138838,0.010355,39997,2,"0.0:fraud_rate=0.253,n=27738; 1.0:fraud_rate=0.130,n=12259",,,retain,
+time_period_afternoon,binary,point_biserial,-0.1497,0.01221,39997,2,"0.0:fraud_rate=0.255,n=28288; 1.0:fraud_rate=0.120,n=11709",,,retain,
+time_period_evening,binary,point_biserial,-0.088414,0.004284,39997,2,"0.0:fraud_rate=0.231,n=33490; 1.0:fraud_rate=0.133,n=6507",,,exclude_dummy_trap,All transaction_time_period levels were kept; the weakest level is dropped because the one-hot columns always sum to 1.
+country,categorical,cramers_v,0.381952,0.075328,39997,12,"nigeria:fraud_rate=0.374,n=4589; brazil:fraud_rate=0.391,n=4365; russia:fraud_rate=0.400,n=4347",,,retain,
+currency_resolved,categorical,cramers_v,0.381952,0.075328,39997,11,"eur:fraud_rate=0.076,n=5609; ngn:fraud_rate=0.374,n=4589; brl:fraud_rate=0.391,n=4365",,country,exclude_redundant,"cramers_v=1.000 with country, which has higher mutual information."
+city,categorical,cramers_v,0.087396,0.004689,39997,11,"unknown city:fraud_rate=0.225,n=37357; phoenix:fraud_rate=0.087,n=298; dallas:fraud_rate=0.069,n=276",,,retain,
+city_size,categorical,cramers_v,0.054864,0.001868,39997,2,"medium:fraud_rate=0.219,n=38960; large:fraud_rate=0.077,n=1037",,city,exclude_redundant,"cramers_v=1.000 with city, which has higher mutual information."
+merchant_category,categorical,cramers_v,0.01584,0.000126,39997,9,"healthcare:fraud_rate=0.207,n=4953; gas:fraud_rate=0.220,n=4912; restaurant:fraud_rate=0.213,n=4871",,,exclude_low_association,
+merchant_type,categorical,cramers_v,0.022346,0.000251,39997,17,"online:fraud_rate=0.216,n=7368; physical:fraud_rate=0.216,n=5030; medical:fraud_rate=0.200,n=2573",,,exclude_low_association,
+merchant,categorical,cramers_v,0.050735,0.001282,39997,105,"truck stop:fraud_rate=0.218,n=872; chegg:fraud_rate=0.232,n=865; local gas station:fraud_rate=0.210,n=862",,,exclude_high_cardinality,
+card_type,categorical,cramers_v,0.012991,8.4e-05,39997,6,"platinum credit:fraud_rate=0.224,n=8199; premium debit:fraud_rate=0.210,n=8159; basic debit:fraud_rate=0.214,n=8013",,,exclude_low_association,
+device,categorical,cramers_v,0.611277,0.16227,39997,9,"edge:fraud_rate=0.126,n=6198; ios app:fraud_rate=0.137,n=6110; chrome:fraud_rate=0.139,n=6107",chip reader; magnetic stripe; nfc payment,,exclude_possible_target_leakage,These values/categories are always or never fraud (>= 100 rows).
+channel,categorical,cramers_v,0.599193,0.155852,39997,4,"web:fraud_rate=0.137,n=23186; mobile:fraud_rate=0.132,n=11636; pos:fraud_rate=1.000,n=3576",pos,,exclude_possible_target_leakage,These values/categories are always or never fraud (>= 100 rows).
+transaction_id,,,,,,,,,,exclude_identifier,"Identifier / timestamp, not a predictive feature."
+customer_id,,,,,,,,,,exclude_identifier,"Identifier / timestamp, not a predictive feature."
+card_number,,,,,,,,,,exclude_identifier,"Identifier / timestamp, not a predictive feature."
+timestamp,,,,,,,,,,exclude_identifier,"Identifier / timestamp, not a predictive feature."
+amount,,,,,,,,,,exclude_superseded,Replaced by amount_usd_log_z (raw amount in mixed currencies).
+currency,,,,,,,,,,exclude_superseded,Replaced by currency_resolved.
+device_fingerprint,,,,,,,,,,exclude_identifier,"Identifier / timestamp, not a predictive feature."
+ip_address,,,,,,,,,,exclude_identifier,"Identifier / timestamp, not a predictive feature."
+transaction_hour,,,,,,,,,,exclude_superseded,Replaced by hour_sin / hour_cos.
+velocity_last_hour,,,,,,,,,,exclude_superseded,Replaced by velocity_* columns.
+exchange_rate,,,,,,,,,,exclude_superseded,Replaced by country / currency_resolved (encodes the currency only).
+exchange_rate_date,,,,,,,,,,exclude_identifier,"Identifier / timestamp, not a predictive feature."
+amount_usd,,,,,,,,,,exclude_superseded,Replaced by amount_usd_log_z.
+customer_txn_count,,,,,,,,,,exclude_superseded,Replaced by customer_txn_count_z.
+customer_avg_amount_usd,,,,,,,,,,exclude_superseded,Replaced by customer_avg_amount_usd_log_z.
+customer_away_share,,,,,,,,,,exclude_superseded,Replaced by customer_away_share_minmax.
+customer_night_share,,,,,,,,,,exclude_superseded,Replaced by customer_night_share_minmax.
+customers_per_device,,,,,,,,,,exclude_superseded,Replaced by customers_per_device_minmax.
+card_brand,,,,,,,,,,exclude_superseded,Replaced by card_brand_* one-hot columns.
+transaction_amount_category,,,,,,,,,,exclude_superseded,Replaced by transaction_amount_category_code_minmax.
+transaction_frequency_category,,,,,,,,,,exclude_superseded,Replaced by transaction_frequency_category_code_minmax.
+customer_activity_level,,,,,,,,,,exclude_superseded,Replaced by customer_activity_level_code_minmax.
+customer_spending_level,,,,,,,,,,exclude_superseded,Replaced by customer_spending_level_code_minmax.
+transaction_time_period,,,,,,,,,,exclude_superseded,Replaced by time_period_* one-hot columns.
+velocity_num_transactions,,,,,,,,,,exclude_superseded,Replaced by velocity_num_transactions_z.
+velocity_total_amount,,,,,,,,,,exclude_superseded,Replaced by velocity_total_amount_log_z.
+velocity_unique_merchants,,,,,,,,,,exclude_superseded,Replaced by velocity_unique_merchants_z.
+velocity_unique_countries,,,,,,,,,,exclude_superseded,Replaced by velocity_unique_countries_z.
+velocity_max_single_amount,,,,,,,,,,exclude_superseded,Replaced by velocity_max_single_amount_z.
+transaction_amount_category_code,,,,,,,,,,exclude_superseded,Replaced by transaction_amount_category_code_minmax.
+transaction_frequency_category_code,,,,,,,,,,exclude_superseded,Replaced by transaction_frequency_category_code_minmax.
+customer_activity_level_code,,,,,,,,,,exclude_superseded,Replaced by customer_activity_level_code_minmax.
+customer_spending_level_code,,,,,,,,,,exclude_superseded,Replaced by customer_spending_level_code_minmax.

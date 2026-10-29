@@ -1,0 +1,34 @@
+column,source_feature,feature_type,encoding,mutual_information,association
+amount_usd_log_z,amount_usd_log_z,numeric,as in 6D (already transformed / normalized),0.177675,-0.23487
+customer_away_share_minmax,customer_away_share_minmax,numeric,as in 6D (already transformed / normalized),0.0,0.076989
+customer_night_share_minmax,customer_night_share_minmax,numeric,as in 6D (already transformed / normalized),0.00382,0.057023
+customers_per_device_minmax,customers_per_device_minmax,numeric,as in 6D (already transformed / normalized),0.096328,-0.370267
+hour_sin,hour_sin,numeric,as in 6D (already transformed / normalized),0.027668,0.155595
+hour_cos,hour_cos,numeric,as in 6D (already transformed / normalized),0.056139,0.295238
+distance_from_home,distance_from_home,binary,as in 6D (already transformed / normalized),0.212049,0.645803
+time_period_night,time_period_night,binary,as in 6D (already transformed / normalized),0.066711,0.386848
+time_period_morning,time_period_morning,binary,as in 6D (already transformed / normalized),0.010355,-0.138838
+time_period_afternoon,time_period_afternoon,binary,as in 6D (already transformed / normalized),0.01221,-0.1497
+country_nigeria,country,categorical,not written: reference level ('nigeria' = all country_* are 0),0.075328,0.381952
+country_australia,country,categorical,one-hot (country == 'australia'),0.075328,0.381952
+country_brazil,country,categorical,one-hot (country == 'brazil'),0.075328,0.381952
+country_canada,country,categorical,one-hot (country == 'canada'),0.075328,0.381952
+country_france,country,categorical,one-hot (country == 'france'),0.075328,0.381952
+country_germany,country,categorical,one-hot (country == 'germany'),0.075328,0.381952
+country_japan,country,categorical,one-hot (country == 'japan'),0.075328,0.381952
+country_mexico,country,categorical,one-hot (country == 'mexico'),0.075328,0.381952
+country_russia,country,categorical,one-hot (country == 'russia'),0.075328,0.381952
+country_singapore,country,categorical,one-hot (country == 'singapore'),0.075328,0.381952
+country_uk,country,categorical,one-hot (country == 'uk'),0.075328,0.381952
+country_usa,country,categorical,one-hot (country == 'usa'),0.075328,0.381952
+city_unknown_city,city,categorical,not written: reference level ('unknown city' = all city_* are 0),0.004689,0.087396
+city_chicago,city,categorical,one-hot (city == 'chicago'),0.004689,0.087396
+city_dallas,city,categorical,one-hot (city == 'dallas'),0.004689,0.087396
+city_houston,city,categorical,one-hot (city == 'houston'),0.004689,0.087396
+city_los_angeles,city,categorical,one-hot (city == 'los angeles'),0.004689,0.087396
+city_new_york,city,categorical,one-hot (city == 'new york'),0.004689,0.087396
+city_philadelphia,city,categorical,one-hot (city == 'philadelphia'),0.004689,0.087396
+city_phoenix,city,categorical,one-hot (city == 'phoenix'),0.004689,0.087396
+city_san_antonio,city,categorical,one-hot (city == 'san antonio'),0.004689,0.087396
+city_san_diego,city,categorical,one-hot (city == 'san diego'),0.004689,0.087396
+city_san_jose,city,categorical,one-hot (city == 'san jose'),0.004689,0.087396
