@@ -1,0 +1,16 @@
+feature,source,transformation,normalization,imputed_rows,imputed_with_median,skew_before,skew_after,center,scale,min_after,max_after,mean_after,std_after
+amount_usd_log_z,amount_usd,log1p,z-score,318,370.64,36.075,-1.0694,5.639444,1.622053,-3.4706,5.5765,0.0,1.0
+customer_avg_amount_usd_log_z,customer_avg_amount_usd,log1p,z-score,1,711.29,20.535,1.0569,6.979188,1.202738,-5.6938,5.0485,0.0,1.0
+velocity_total_amount_log_z,velocity_total_amount,log1p,z-score,0,24488878.6996,5.239,-1.7278,16.820359,1.325936,-10.3055,2.9229,0.0,1.0
+customer_txn_count_z,customer_txn_count,none,z-score,0,84.0,0.8401,0.8401,84.642548,27.53327,-3.0379,5.1704,0.0,1.0
+velocity_num_transactions_z,velocity_num_transactions,none,z-score,0,740.0,0.849,0.849,789.625397,524.091258,-1.5067,5.7573,0.0,1.0
+velocity_max_single_amount_z,velocity_max_single_amount,none,z-score,0,1953490.3051,0.7375,0.7375,2374179.298894,1502320.192911,-1.5803,2.582,0.0,1.0
+velocity_unique_merchants_z,velocity_unique_merchants,none,z-score,0,105.0,-2.9261,-2.9261,96.377553,18.916879,-5.0948,0.4558,0.0,1.0
+velocity_unique_countries_z,velocity_unique_countries,none,z-score,0,12.0,-4.9378,-4.9378,11.640023,1.354313,-8.5948,0.2658,-0.0,1.0
+customer_away_share_minmax,customer_away_share,none,"min-max [0, 1]",0,0.3333,0.6723,0.6723,0.0,1.0,0.0,1.0,0.3344,0.0915
+customer_night_share_minmax,customer_night_share,none,"min-max [0, 1]",0,0.2376,2.0753,2.0753,0.0,1.0,0.0,1.0,0.2389,0.066
+customers_per_device_minmax,customers_per_device,none,"min-max [0, 1]",0,1.0,0.2698,0.2698,1.0,4.0,0.0,1.0,0.1107,0.1249
+transaction_amount_category_code_minmax,transaction_amount_category_code,"ordinal encoding (Low=0, Medium=1, High=2)","min-max [0, 1]",318,1.0,-0.0,-0.0,0.0,2.0,0.0,1.0,0.5,0.4066
+transaction_frequency_category_code_minmax,transaction_frequency_category_code,"ordinal encoding (Low=0, Medium=1, High=2)","min-max [0, 1]",24,1.0,0.0006,0.0006,0.0,2.0,0.0,1.0,0.4998,0.4081
+customer_activity_level_code_minmax,customer_activity_level_code,"ordinal encoding (Low=0, Medium=1, High=2)","min-max [0, 1]",0,1.0,0.0525,0.0525,0.0,2.0,0.0,1.0,0.4855,0.4029
+customer_spending_level_code_minmax,customer_spending_level_code,"ordinal encoding (Low=0, Medium=1, High=2)","min-max [0, 1]",1,1.0,0.0009,0.0009,0.0,2.0,0.0,1.0,0.4998,0.4082
