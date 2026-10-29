@@ -16,5 +16,5 @@ Ky dokument paraqet ndarjen e detyrave për fazën e përpunimit dhe përgatitje
 | Dimensionality reduction                                   | E           | [x]      |
 | Feature creation                                           | F           | [x]      |
 | Discretization & Binarization                              | F           | [x]      |
-| Data transformation and normalization                      | B           | [ ]      |
+| Data transformation and normalization                      | B           | [x]      |
 | README documentation                                       | E           | [ ]      |
