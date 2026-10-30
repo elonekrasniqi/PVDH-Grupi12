@@ -1,0 +1,25 @@
+column,expected_type,total_rows,non_missing,missing_count,valid_count,invalid_count,format_issue_count,unclassified_count,invalid_examples,format_examples
+transaction_id,identifier,409099,409099,0,409098,1,0,0,c,
+customer_id,identifier,409099,409098,1,392347,0,16751,0,,cust-90462 | cust-91730 | 59395
+card_number,string,409099,409098,1,409098,0,0,0,,
+timestamp,datetime,409099,409098,1,397146,0,11952,0,,01/10/2024 03:38:58 | 30/09/2024 13:42:58 | 01/10/2024 01:34:35
+merchant_category,category,409099,401003,8096,401003,0,0,0,,
+merchant_type,category,409099,409098,1,409098,0,0,0,,
+merchant,string,409099,409098,1,409098,0,0,0,,
+amount,float,409099,405552,3547,405552,0,0,0,,
+currency,category,409099,397632,11467,397632,0,0,0,,
+country,category,409099,409098,1,409098,0,0,0,,
+city,category,409099,409098,1,409098,0,0,0,,
+city_size,category,409099,409098,1,409098,0,0,0,,
+card_type,category,409099,403164,5935,403164,0,0,0,,
+card_present,boolean,409099,409098,1,381277,0,27821,0,,no | yes
+device,category,409099,409098,1,409098,0,0,0,,
+channel,category,409099,396528,12571,396528,0,0,0,,
+device_fingerprint,string,409099,409098,1,409098,0,0,0,,
+ip_address,string,409099,409098,1,409098,0,0,0,,
+distance_from_home,float,409099,409098,1,409098,0,0,0,,
+high_risk_merchant,boolean,409099,409098,1,409098,0,0,0,,
+transaction_hour,integer_0_23,409099,409098,1,0,0,409098,0,,8.0 | 12.0 | 11.0
+weekend_transaction,boolean,409099,409098,1,409098,0,0,0,,
+velocity_last_hour,string,409099,409098,1,409098,0,0,0,,
+is_fraud,boolean,409099,409098,1,409098,0,0,0,,
