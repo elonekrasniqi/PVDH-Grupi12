@@ -20,11 +20,12 @@ spec.loader.exec_module(module)
 
 def sample_data(n=120):
     return pd.DataFrame({
-        'distance_from_home': [i * .37 + (i % 7) for i in range(n)],
-        'transaction_hour': [i % 24 for i in range(n)],
-        'country': [['USA', 'UK', 'FRANCE'][i % 3] for i in range(n)],
-        'city': [['NY', 'LONDON', 'PARIS'][i % 3] for i in range(n)],
-        'city_size': [['large', 'small'][i % 2] for i in range(n)],
+        'transaction_id': [f'tx_{i}' for i in range(n)],
+        'amount_usd_log_z': [(i % 31 - 15) / 8 for i in range(n)],
+        'customer_away_share_minmax': [(i % 17) / 16 for i in range(n)],
+        'hour_sin': [np.sin(i * np.pi / 12) for i in range(n)],
+        'hour_cos': [np.cos(i * np.pi / 12) for i in range(n)],
+        'country_usa': [int(i % 3 == 0) for i in range(n)],
         'is_fraud': [i % 2 for i in range(n)],
     })
 
@@ -88,22 +89,19 @@ class DimensionalityReductionTests(unittest.TestCase):
     def test_pipeline_reproduces_saved_components(self):
         self.run_pca(seed=42)
         pipeline = joblib.load(self.output / '7D_PCA_PIPELINE.joblib')
-        X = self.data[module.NUMERIC + module.CATEGORICAL]
+        X = self.data.drop(columns=['transaction_id', 'is_fraud'])
         y = self.data['is_fraud']
         X_train, X_test, _, _ = train_test_split(X, y, test_size=.2, random_state=42, stratify=y)
         for X_part, filename in ((X_train, '7A_PCA_TRAIN.csv'), (X_test, '7B_PCA_TEST.csv')):
             saved = pd.read_csv(self.output / filename).drop(columns='is_fraud').to_numpy()
             np.testing.assert_allclose(pipeline.transform(X_part), saved, rtol=1e-8, atol=1e-8)
 
-    def test_pipeline_handles_unseen_categories(self):
+    def test_pipeline_accepts_selected_feature_columns(self):
         self.run_pca()
         pipeline = joblib.load(self.output / '7D_PCA_PIPELINE.joblib')
-        new = pd.DataFrame([{'distance_from_home': 8.0, 'transaction_hour': 4,
-                             'country': 'UNKNOWN_COUNTRY', 'city': 'UNKNOWN_CITY',
-                             'city_size': 'medium'}])
-        result = pipeline.transform(new)
-        self.assertEqual(result.shape[0], 1)
-        self.assertTrue(np.isfinite(result).all())
+        X = self.data.drop(columns=['transaction_id', 'is_fraud'])
+        self.assertEqual(pipeline.transform(X.head(1)).shape[1],
+                         pipeline.named_steps['pca'].n_components_)
 
     def test_report_is_valid_json_and_records_settings(self):
         self.run_pca(variance=.9, seed=17)
@@ -111,8 +109,8 @@ class DimensionalityReductionTests(unittest.TestCase):
         self.assertEqual(report['seed'], 17)
         self.assertEqual(report['variance_threshold'], .9)
         self.assertTrue(report['target_excluded_from_pca'])
-        self.assertEqual(report['numeric_features'], module.NUMERIC)
-        self.assertEqual(report['categorical_features'], module.CATEGORICAL)
+        self.assertEqual(report['numeric_features'], list(self.data.drop(columns=['transaction_id', 'is_fraud']).columns))
+        self.assertEqual(report['categorical_features'], [])
 
     def test_reproducibility_with_same_seed(self):
         self.run_pca(seed=7)
@@ -122,32 +120,33 @@ class DimensionalityReductionTests(unittest.TestCase):
         pd.testing.assert_frame_equal(first, second)
 
     def test_missing_required_column_rejected(self):
-        self.data.drop(columns='city').to_csv(self.source, index=False)
-        with self.assertRaisesRegex(ValueError, 'Missing required columns'):
+        self.data.drop(columns='is_fraud').to_csv(self.source, index=False)
+        with self.assertRaisesRegex(ValueError, 'Missing required column'):
             self.run_pca()
 
     def test_missing_numeric_value_rejected(self):
-        self.data.loc[0, 'distance_from_home'] = np.nan
+        self.data.loc[0, 'amount_usd_log_z'] = np.nan
         self.data.to_csv(self.source, index=False)
-        with self.assertRaisesRegex(ValueError, 'missing values'):
+        with self.assertRaisesRegex(ValueError, 'missing or non-finite'):
             self.run_pca()
 
     def test_missing_categorical_value_rejected(self):
-        self.data.loc[0, 'country'] = None
+        self.data.loc[0, 'country_usa'] = None
         self.data.to_csv(self.source, index=False)
-        with self.assertRaisesRegex(ValueError, 'missing values'):
+        with self.assertRaisesRegex(ValueError, 'missing or non-finite'):
             self.run_pca()
 
     def test_non_numeric_value_rejected(self):
-        self.data.loc[0, 'distance_from_home'] = 'invalid'
+        self.data['amount_usd_log_z'] = self.data['amount_usd_log_z'].astype(object)
+        self.data.loc[0, 'amount_usd_log_z'] = 'invalid'
         self.data.to_csv(self.source, index=False)
         with self.assertRaises((ValueError, TypeError)):
             self.run_pca()
 
     def test_infinite_numeric_value_rejected(self):
-        self.data.loc[0, 'distance_from_home'] = np.inf
+        self.data.loc[0, 'amount_usd_log_z'] = np.inf
         self.data.to_csv(self.source, index=False)
-        with self.assertRaisesRegex(ValueError, 'infinite values'):
+        with self.assertRaisesRegex(ValueError, 'missing or non-finite'):
             self.run_pca()
 
     def test_non_binary_target_rejected(self):
@@ -181,7 +180,7 @@ class DimensionalityReductionTests(unittest.TestCase):
         self.run_pca()
         pipeline = joblib.load(self.output / '7D_PCA_PIPELINE.joblib')
         self.assertNotIn('is_fraud', pipeline.feature_names_in_.tolist())
-        self.assertEqual(set(pipeline.feature_names_in_), set(module.NUMERIC + module.CATEGORICAL))
+        self.assertEqual(set(pipeline.feature_names_in_), set(self.data.columns) - {'transaction_id', 'is_fraud'})
 
 
 if __name__ == '__main__':
