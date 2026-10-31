@@ -1,7 +1,5 @@
-"""Compare raw vs format-standardized data using identical validation rules.
+"""Compare raw vs format-standardized data using identical validation rules
 
-Run: py src/phase_1/1_4_data_quality_comparison.py
-Does not modify either input CSV. Requires 1_3_data_type_validation.py.
 """
 import csv
 import importlib.util
@@ -9,8 +7,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 RAW = ROOT / 'dataset' / 'synthetic_fraud_data.csv'
-STANDARDIZED = ROOT / 'dataset' / 'phase_1' / '1F_FORMAT_STANDARDIZED_DATASET.csv'
-OUTPUT = ROOT / 'dataset' / 'phase_1' / '1H_DATA_QUALITY_COMPARISON.csv'
+STANDARDIZED = ROOT / 'dataset' / 'phase_1' / '1B_FORMAT_STANDARDIZED_DATASET.csv'
+OUTPUT = ROOT / 'dataset' / 'phase_1' / '1D_DATA_QUALITY_COMPARISON.csv'
 VALIDATOR = Path(__file__).with_name('1_3_data_type_validation.py')
 METRICS = ('total_rows', 'non_missing', 'missing_count', 'valid_count',
            'invalid_count', 'format_issue_count', 'unclassified_count')
@@ -83,7 +81,7 @@ def main():
         y = sum(r[f'after_{metric}'] for r in rows)
         print(f'{metric}: {x} -> {y} (change {y-x:+d})')
     print('Note: comparison covers FORMAT STANDARDIZATION only, not the full preprocessing pipeline.')
-    print('A format issue can remain if 1_2 does not standardize that column (e.g. transaction_hour).')
+    print('A format issue can remain if 1_2 does not standardize that value (see 1C_DATA_TYPE_REPORT examples).')
 
 
 if __name__ == '__main__':

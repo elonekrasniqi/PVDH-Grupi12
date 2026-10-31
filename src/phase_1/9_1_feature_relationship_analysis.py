@@ -33,9 +33,9 @@ from sklearn.feature_selection import mutual_info_classif
 
 ROOT = Path(__file__).resolve().parents[2]
 DATA = ROOT / "dataset" / "phase_1"
-DEFAULT_INPUT = DATA / "6D_TRANSFORMED_NORMALIZED_DATASET.csv"
-DEFAULT_REPORT = DATA / "6F_FEATURE_RELATIONSHIP_REPORT.csv"
-DEFAULT_PAIRS = DATA / "6F_FEATURE_CORRELATION_PAIRS.csv"
+DEFAULT_INPUT = DATA / "8A_TRANSFORMED_NORMALIZED_DATASET.csv"
+DEFAULT_REPORT = DATA / "9A_FEATURE_RELATIONSHIP_REPORT.csv"
+DEFAULT_PAIRS = DATA / "9B_FEATURE_CORRELATION_PAIRS.csv"
 
 TARGET = "is_fraud"
 SEED = 42
@@ -202,7 +202,7 @@ def measure_candidates(data: pd.DataFrame) -> dict[str, dict]:
             "association": association, "mutual_information": float(mi[column]),
             "valid_rows": int(values.notna().sum()), "levels": int(values.nunique()),
             "top_categories": top_categories(values, target) if kind != "numeric" else "",
-            "potential_leakage": leakage_levels(values, target) if kind != "numeric" else "",
+            "potential_leakage": leakage_levels(values, target) if kind != "numeric" or values.nunique() <= 10 else "",
             "redundant_with": "", "notes": "",
         }
     return rows

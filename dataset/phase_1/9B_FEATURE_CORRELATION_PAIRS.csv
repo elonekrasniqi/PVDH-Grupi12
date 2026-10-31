@@ -2,10 +2,10 @@ feature_a,feature_b,metric,relationship,redundant,dropped
 merchant_type,merchant,cramers_v,1.0,True,-
 country,currency_resolved,cramers_v,1.0,True,currency_resolved
 city,city_size,cramers_v,1.0,True,city_size
-customers_per_device_minmax,is_shared_device,spearman,0.999517,True,is_shared_device
+customers_per_device_minmax,is_shared_device,spearman,0.99999,True,-
+amount_usd_log_z,transaction_amount_category_code_minmax,spearman,0.942809,True,transaction_amount_category_code_minmax
 customer_avg_amount_usd_log_z,customer_spending_level_code_minmax,spearman,0.942809,True,-
-amount_usd_log_z,transaction_amount_category_code_minmax,spearman,0.942787,True,transaction_amount_category_code_minmax
-customer_txn_count_z,customer_activity_level_code_minmax,spearman,0.942481,True,-
+customer_txn_count_z,customer_activity_level_code_minmax,spearman,0.94269,True,-
 velocity_num_transactions_z,transaction_frequency_category_code_minmax,spearman,0.94196,True,-
 merchant_category,merchant,cramers_v,0.922944,True,-
 velocity_num_transactions_z,velocity_unique_merchants_z,spearman,0.891513,True,-

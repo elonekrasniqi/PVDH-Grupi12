@@ -1,0 +1,25 @@
+column,total_rows,missing_count,missing_pct,empty_cells,placeholder_values,strategy,reason
+transaction_id,409099,0,0.0,0,,none needed,No missing values.
+customer_id,409099,1,0.0002,1,,not imputed,Identifier or column without a defined imputation rule; left empty.
+card_number,409099,1,0.0002,1,,not imputed,Identifier or column without a defined imputation rule; left empty.
+timestamp,409099,1,0.0002,1,,not imputed,Identifier or column without a defined imputation rule; left empty.
+merchant_category,409099,10743,2.626,5394,'N/a'=2702; '?'=2647,category 'Unknown',Nominal attribute: an explicit 'Unknown' level keeps the row and does not invent a category.
+merchant_type,409099,1,0.0002,1,,not imputed,Identifier or column without a defined imputation rule; left empty.
+merchant,409099,1,0.0002,1,,not imputed,Identifier or column without a defined imputation rule; left empty.
+amount,409099,6995,1.7099,3547,'-999.0'=3448,median of the same currency (currency inferred from country if missing); global median fallback; amount <= 0 (-999 placeholder) treated as missing,Amounts are in local currency and right-skewed: a per-currency median is robust to extreme values and keeps the currency scale.
+currency,409099,15149,3.703,7651,'N/A'=3816; '?'=3682,category 'Unknown',Nominal attribute: an explicit 'Unknown' level keeps the row and does not invent a category. Currency is resolved from country in 4_1.
+country,409099,1,0.0002,1,,not imputed,Identifier or column without a defined imputation rule; left empty.
+city,409099,1,0.0002,1,,not imputed,Identifier or column without a defined imputation rule; left empty.
+city_size,409099,1,0.0002,1,,not imputed,Identifier or column without a defined imputation rule; left empty.
+card_type,409099,7890,1.9286,4043,'?'=1955; 'N/A'=1892,category 'Unknown',Nominal attribute: an explicit 'Unknown' level keeps the row and does not invent a category.
+card_present,409099,1,0.0002,1,,not imputed,Identifier or column without a defined imputation rule; left empty.
+device,409099,1,0.0002,1,,not imputed,Identifier or column without a defined imputation rule; left empty.
+channel,409099,16795,4.1054,8377,'?'=4224; 'N/A'=4194,category 'Unknown',Nominal attribute: an explicit 'Unknown' level keeps the row and does not invent a category.
+device_fingerprint,409099,1,0.0002,1,,not imputed,Identifier or column without a defined imputation rule; left empty.
+ip_address,409099,1,0.0002,1,,not imputed,Identifier or column without a defined imputation rule; left empty.
+distance_from_home,409099,1,0.0002,1,,median,Few values missing; the median keeps the column distribution almost unchanged.
+high_risk_merchant,409099,1,0.0002,1,,not imputed,Identifier or column without a defined imputation rule; left empty.
+transaction_hour,409099,1,0.0002,1,,hour from timestamp; median fallback,"The hour is fully determined by the timestamp, so it can be recovered exactly."
+weekend_transaction,409099,1,0.0002,1,,not imputed,Identifier or column without a defined imputation rule; left empty.
+velocity_last_hour,409099,1,0.0002,1,,not imputed,Identifier or column without a defined imputation rule; left empty.
+is_fraud,409099,1,0.0002,1,,remove row,The target cannot be imputed; a guessed label would bias the fraud rate.

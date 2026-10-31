@@ -7,9 +7,9 @@ from bisect import bisect_right
 
 ROOT = Path(__file__).resolve().parents[2]
 
-TRANSACTIONS = ROOT / "dataset/phase_1/3F_DUPLICATES_REMOVED_DATASET.csv"
+TRANSACTIONS = ROOT / "dataset/phase_1/3B_DUPLICATES_REMOVED_DATASET.csv"
 RATES = ROOT / "dataset/exchange_rates_2024.csv"
-OUTPUT = ROOT / "dataset/phase_1/4F_INTEGRATED_DATASET.csv"
+OUTPUT = ROOT / "dataset/phase_1/4A_INTEGRATED_DATASET.csv"
 
 
 # Currency mapping based on the observed dataset relationship

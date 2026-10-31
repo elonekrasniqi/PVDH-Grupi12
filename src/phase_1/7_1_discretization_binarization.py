@@ -14,8 +14,8 @@ import pandas as pd
 ROOT = Path(__file__).resolve().parents[2]
 DATA = ROOT / "dataset" / "phase_1"
 DEFAULT_INPUT = DATA / "6A_FEATURE_CREATION_DATASET.csv"
-DEFAULT_OUTPUT = DATA / "6B_DISCRETIZED_BINARIZED_DATASET.csv"
-DEFAULT_REPORT = DATA / "6C_DISCRETIZATION_BINARIZATION_REPORT.csv"
+DEFAULT_OUTPUT = DATA / "7A_DISCRETIZED_BINARIZED_DATASET.csv"
+DEFAULT_REPORT = DATA / "7B_DISCRETIZATION_BINARIZATION_REPORT.csv"
 
 TARGET = "is_fraud"
 BOOLEAN_COLUMNS = ("is_fraud", "card_present", "high_risk_merchant", "weekend_transaction")

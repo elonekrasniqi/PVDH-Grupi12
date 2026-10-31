@@ -119,7 +119,7 @@ class TestSamplingOnGeneratedData(SamplingChecks, unittest.TestCase):
 
 def real_outputs_available():
     try:
-        first = (DATA / "4F_INTEGRATED_DATASET.csv").open(encoding="utf-8").readline()
+        first = (DATA / "4A_INTEGRATED_DATASET.csv").open(encoding="utf-8").readline()
     except FileNotFoundError:
         return False
     # Skip if the file is still a Git LFS pointer (run `git lfs pull`).
@@ -135,7 +135,7 @@ class TestSamplingOnRealData(SamplingChecks, unittest.TestCase):
     def setUpClass(cls):
         cls.output_dir = DATA
         cls.fraction = sampling.DEFAULT_FRACTION
-        cls.population = read_csv(DATA / "4F_INTEGRATED_DATASET.csv")
+        cls.population = read_csv(DATA / "4A_INTEGRATED_DATASET.csv")
         cls.samples = {
             method: read_csv(DATA / name)
             for method, name in sampling.OUTPUT_FILES.items()

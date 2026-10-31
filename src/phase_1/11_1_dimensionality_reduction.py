@@ -17,7 +17,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 
 ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_INPUT = ROOT / 'dataset/phase_1/6G_FEATURE_SUBSET_DATASET.csv'
+DEFAULT_INPUT = ROOT / 'dataset/phase_1/10A_FEATURE_SUBSET_DATASET.csv'
 DEFAULT_DIR = ROOT / 'dataset/phase_1'
 TARGET = 'is_fraud'
 ID_COLUMN = 'transaction_id'
@@ -62,10 +62,10 @@ def run(input_path: Path, output_dir: Path, variance: float = 0.95, seed: int = 
     columns = [f'PC{i + 1}' for i in range(train_reduced.shape[1])]
     output_dir.mkdir(parents=True, exist_ok=True)
     paths = {
-        'train': output_dir / '7A_PCA_TRAIN.csv',
-        'test': output_dir / '7B_PCA_TEST.csv',
-        'report': output_dir / '7C_PCA_REPORT.json',
-        'model': output_dir / '7D_PCA_PIPELINE.joblib',
+        'train': output_dir / '11A_PCA_TRAIN.csv',
+        'test': output_dir / '11B_PCA_TEST.csv',
+        'report': output_dir / '11C_PCA_REPORT.json',
+        'model': output_dir / '11D_PCA_PIPELINE.joblib',
     }
     for key, values, labels in [('train', train_reduced, y_train), ('test', test_reduced, y_test)]:
         frame = pd.DataFrame(values, columns=columns)

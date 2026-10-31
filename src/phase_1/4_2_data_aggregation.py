@@ -5,7 +5,7 @@ from collections import defaultdict
 
 ROOT = Path(__file__).resolve().parents[2]
 
-INPUT = ROOT / "dataset/phase_1/4F_INTEGRATED_DATASET.csv"
+INPUT = ROOT / "dataset/phase_1/4A_INTEGRATED_DATASET.csv"
 OUTPUT_DIR = ROOT / "dataset/phase_1"
 
 
@@ -81,22 +81,22 @@ def main():
 
     aggregate_data(
         "country",
-        "4A_AGGREGATED_BY_COUNTRY.csv"
+        "4B_AGGREGATED_BY_COUNTRY.csv"
     )
 
     aggregate_data(
         "currency_resolved",
-        "4B_AGGREGATED_BY_CURRENCY.csv"
+        "4C_AGGREGATED_BY_CURRENCY.csv"
     )
 
     aggregate_data(
         "date",
-        "4C_AGGREGATED_BY_DATE.csv"
+        "4D_AGGREGATED_BY_DATE.csv"
     )
 
     aggregate_data(
         "merchant_category",
-        "4D_AGGREGATED_BY_MERCHANT_CATEGORY.csv"
+        "4E_AGGREGATED_BY_MERCHANT_CATEGORY.csv"
     )
 
     print("\nDATA AGGREGATION COMPLETED")

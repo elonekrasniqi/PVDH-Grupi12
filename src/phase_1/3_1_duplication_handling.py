@@ -19,8 +19,8 @@ def find_root() -> Path:
 
 ROOT = find_root()
 DEFAULT_INPUT = ROOT / "dataset" / "phase_1" / "2B_MISSING_VALUES_HANDLED_DATASET.csv"
-DEFAULT_REPORT = ROOT / "dataset" / "phase_1" / "3F_DUPLICATES_REPORT.csv"
-DEFAULT_OUTPUT = ROOT / "dataset" / "phase_1" / "3F_DUPLICATES_REMOVED_DATASET.csv"
+DEFAULT_REPORT = ROOT / "dataset" / "phase_1" / "3A_DUPLICATES_REPORT.csv"
+DEFAULT_OUTPUT = ROOT / "dataset" / "phase_1" / "3B_DUPLICATES_REMOVED_DATASET.csv"
 KEY_COLUMN = "transaction_id"
 REPORT_COLUMNS = ("row_number", "transaction_id", "duplicate_type", "duplicate_of_row", "action")
 

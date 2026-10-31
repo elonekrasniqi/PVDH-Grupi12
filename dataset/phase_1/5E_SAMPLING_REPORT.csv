@@ -1,6 +1,6 @@
 method,rows,sample_fraction_pct,fraud_transactions,fraud_rate_pct,fraud_rate_diff_pp,mean_amount_usd,mean_amount_diff_pct,max_country_share_diff_pp
-population,399972,100.0,86166,21.54,0.0,2835.32,0.0,0.0
-simple_random,39997,10.0,8578,21.45,-0.1,2901.05,2.32,0.37
-stratified,39997,10.0,8615,21.54,0.0,2326.44,-17.95,0.0
-systematic,39997,10.0,8539,21.35,-0.19,2865.48,1.06,0.24
-balanced,39996,10.0,19998,50.0,28.46,3732.34,31.64,3.58
+population,399972,100.0,86166,21.54,0.0,2842.74,0.0,0.0
+simple_random,39997,10.0,8578,21.45,-0.1,2907.71,2.29,0.37
+stratified,39997,10.0,8615,21.54,0.0,2333.46,-17.92,0.0
+systematic,39997,10.0,8539,21.35,-0.19,2872.17,1.04,0.24
+balanced,39996,10.0,19998,50.0,28.46,3738.98,31.53,3.58

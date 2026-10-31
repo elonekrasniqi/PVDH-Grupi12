@@ -17,8 +17,8 @@ def load(name, file):
     return module
 
 
-analysis = load("feature_relationship_analysis_6d", "6_4_feature_relationship_analysis.py")
-selection = load("feature_subset_selection_6d", "6_5_feature_subset_selection.py")
+analysis = load("feature_relationship_analysis", "9_1_feature_relationship_analysis.py")
+selection = load("feature_subset_selection", "10_1_feature_subset_selection.py")
 
 
 def make_frame(n=20000, seed=0):
@@ -179,8 +179,8 @@ class TestAnalysisAndSelection(unittest.TestCase):
 
 
 def real_outputs_available():
-    paths = [DATA / n for n in ("6D_TRANSFORMED_NORMALIZED_DATASET.csv", "6F_FEATURE_RELATIONSHIP_REPORT.csv",
-                                "6G_FEATURE_SUBSET_DATASET.csv")]
+    paths = [DATA / n for n in ("8A_TRANSFORMED_NORMALIZED_DATASET.csv", "9A_FEATURE_RELATIONSHIP_REPORT.csv",
+                                "10A_FEATURE_SUBSET_DATASET.csv")]
     if not all(p.exists() for p in paths):
         return False
     with paths[0].open(encoding="utf-8") as f:
@@ -192,9 +192,9 @@ class TestRealOutputs(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.source = pd.read_csv(DATA / "6D_TRANSFORMED_NORMALIZED_DATASET.csv", usecols=["transaction_id", "is_fraud"])
-        cls.report = pd.read_csv(DATA / "6F_FEATURE_RELATIONSHIP_REPORT.csv", keep_default_na=False)
-        cls.subset = pd.read_csv(DATA / "6G_FEATURE_SUBSET_DATASET.csv")
+        cls.source = pd.read_csv(DATA / "8A_TRANSFORMED_NORMALIZED_DATASET.csv", usecols=["transaction_id", "is_fraud"])
+        cls.report = pd.read_csv(DATA / "9A_FEATURE_RELATIONSHIP_REPORT.csv", keep_default_na=False)
+        cls.subset = pd.read_csv(DATA / "10A_FEATURE_SUBSET_DATASET.csv")
 
     def test_rows_and_fraud_kept(self):
         self.assertEqual(len(self.subset), len(self.source))
