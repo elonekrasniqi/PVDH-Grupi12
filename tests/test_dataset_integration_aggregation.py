@@ -9,14 +9,14 @@ from math import isclose
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "dataset" / "phase_1"
 
-SOURCE = DATA / "3F_DUPLICATES_REMOVED_DATASET.csv"
-INTEGRATED = DATA / "4F_INTEGRATED_DATASET.csv"
+SOURCE = DATA / "3B_DUPLICATES_REMOVED_DATASET.csv"
+INTEGRATED = DATA / "4A_INTEGRATED_DATASET.csv"
 
 AGGREGATIONS = {
-    "country": DATA / "4A_AGGREGATED_BY_COUNTRY.csv",
-    "currency_resolved": DATA / "4B_AGGREGATED_BY_CURRENCY.csv",
-    "date": DATA / "4C_AGGREGATED_BY_DATE.csv",
-    "merchant_category": DATA / "4D_AGGREGATED_BY_MERCHANT_CATEGORY.csv",
+      "country": DATA / "4B_AGGREGATED_BY_COUNTRY.csv",
+      "currency_resolved": DATA / "4C_AGGREGATED_BY_CURRENCY.csv",
+      "date": DATA / "4D_AGGREGATED_BY_DATE.csv",
+      "merchant_category": DATA / "4E_AGGREGATED_BY_MERCHANT_CATEGORY.csv",
 }
 
 
@@ -84,7 +84,10 @@ class TestDatasetIntegration(unittest.TestCase):
                     "UNKNOWN"
                 )
 
-        self.assertEqual(count, 14827)
+        source_unknown = sum(
+            1 for row in self.source if row["currency"].strip().upper() == "UNKNOWN"
+        )
+        self.assertEqual(count, source_unknown)
 
     def test_usd_conversion_formula(self):
         for row in self.integrated:

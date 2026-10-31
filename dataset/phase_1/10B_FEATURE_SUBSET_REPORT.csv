@@ -1,8 +1,5 @@
 column,source_feature,feature_type,encoding,mutual_information,association
-amount_usd_log_z,amount_usd_log_z,numeric,as in 6D (already transformed / normalized),0.177675,-0.23487
-customer_away_share_minmax,customer_away_share_minmax,numeric,as in 6D (already transformed / normalized),0.0,0.076989
-customer_night_share_minmax,customer_night_share_minmax,numeric,as in 6D (already transformed / normalized),0.00382,0.057023
-customers_per_device_minmax,customers_per_device_minmax,numeric,as in 6D (already transformed / normalized),0.096328,-0.370267
+amount_usd_log_z,amount_usd_log_z,numeric,as in 6D (already transformed / normalized),0.178528,-0.234672
 hour_sin,hour_sin,numeric,as in 6D (already transformed / normalized),0.027668,0.155595
 hour_cos,hour_cos,numeric,as in 6D (already transformed / normalized),0.056139,0.295238
 distance_from_home,distance_from_home,binary,as in 6D (already transformed / normalized),0.212049,0.645803

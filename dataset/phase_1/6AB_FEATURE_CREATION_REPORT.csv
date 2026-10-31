@@ -1,7 +1,0 @@
-feature,description,rows_with_value,mean_fraud,mean_non_fraud,auc,detects_fraud,fraud_rate_by_value,warning
-customer_txn_count,Number of transactions of the customer,39997,84.4876,84.6851,0.5031,weak,,
-customer_avg_amount_usd,Average amount_usd of the customer,39996,2884.3076,2900.7089,0.5081,weak,,
-customer_away_share,Share of the customer's transactions made far from home,39997,0.3478,0.3307,0.5424,weak,,
-customer_night_share,Share of the customer's transactions made between 00:00 and 05:59,39997,0.2461,0.237,0.5322,weak,,
-customers_per_device,Different customers who used this device_fingerprint,39997,1.0898,1.5398,0.7264,strong,1=0.353 (n=22336); 2=0.038 (n=17612); 3=1.000 (n=47); 4=1.000 (n=1); 5=1.000 (n=1),
-card_brand,Card network from the first digit of card_number,39997,,,0.5016,weak,amex=0.216 (n=9941); discover=0.214 (n=9973); mastercard=0.215 (n=10000); visa=0.217 (n=10083),

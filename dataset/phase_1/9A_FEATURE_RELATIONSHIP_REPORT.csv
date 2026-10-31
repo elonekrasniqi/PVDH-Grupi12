@@ -1,19 +1,19 @@
 feature,feature_type,metric,association,mutual_information,valid_rows,levels,top_categories,potential_leakage,redundant_with,recommendation,notes
-amount_usd_log_z,numeric,point_biserial,-0.23487,0.177675,39997,31586,,,,retain,
-customer_avg_amount_usd_log_z,numeric,point_biserial,0.00497,2.3e-05,39997,5532,,,,exclude_low_association,
+amount_usd_log_z,numeric,point_biserial,-0.234672,0.178528,39997,31581,,,,retain,
+customer_avg_amount_usd_log_z,numeric,point_biserial,0.007285,0.002117,39997,4798,,,,exclude_low_association,
 velocity_total_amount_log_z,numeric,point_biserial,0.009747,0.000281,39997,39720,,,,exclude_low_association,
-customer_txn_count_z,numeric,point_biserial,-0.002948,0.0,39997,163,,,,exclude_low_association,
+customer_txn_count_z,numeric,point_biserial,0.000477,0.0,39997,158,,,,exclude_low_association,
 velocity_num_transactions_z,numeric,point_biserial,0.008796,0.002443,39997,2489,,,,exclude_low_association,
 velocity_max_single_amount_z,numeric,point_biserial,0.007522,0.0,39997,13093,,,,exclude_low_association,
 velocity_unique_merchants_z,numeric,point_biserial,0.005386,0.0,39997,106,,,,exclude_low_association,
 velocity_unique_countries_z,numeric,point_biserial,0.001132,0.001406,39997,13,,,,exclude_low_association,
-customer_away_share_minmax,numeric,point_biserial,0.076989,0.0,39997,1285,,,,retain,
-customer_night_share_minmax,numeric,point_biserial,0.057023,0.00382,39997,968,,,,retain,
-customers_per_device_minmax,numeric,point_biserial,-0.370267,0.096328,39997,5,,,,retain,
-transaction_amount_category_code_minmax,numeric,point_biserial,0.030645,0.040161,39997,3,,,amount_usd_log_z,exclude_redundant,"spearman=0.943 with amount_usd_log_z, which has higher mutual information."
+customer_away_share_minmax,numeric,point_biserial,0.04915,0.001478,39997,1315,,,,exclude_low_association,
+customer_night_share_minmax,numeric,point_biserial,0.038909,0.0,39997,976,,,,exclude_low_association,
+customers_per_device_minmax,numeric,point_biserial,0.25028,0.032809,39997,5,,0.25,,exclude_possible_target_leakage,These values/categories are always or never fraud (>= 100 rows).
+transaction_amount_category_code_minmax,numeric,point_biserial,0.030646,0.038509,39997,3,,,amount_usd_log_z,exclude_redundant,"spearman=0.943 with amount_usd_log_z, which has higher mutual information."
 transaction_frequency_category_code_minmax,numeric,point_biserial,0.005292,0.001628,39997,3,,,,exclude_low_association,
-customer_activity_level_code_minmax,numeric,point_biserial,-0.002836,0.001164,39997,3,,,,exclude_low_association,
-customer_spending_level_code_minmax,numeric,point_biserial,0.010288,0.004635,39997,3,,,,exclude_low_association,
+customer_activity_level_code_minmax,numeric,point_biserial,-0.002212,0.001177,39997,3,,,,exclude_low_association,
+customer_spending_level_code_minmax,numeric,point_biserial,0.007796,0.004127,39997,3,,,,exclude_low_association,
 hour_sin,numeric,point_biserial,0.155595,0.027668,39997,13,,,,retain,
 hour_cos,numeric,point_biserial,0.295238,0.056139,39997,13,,,,retain,
 distance_from_home,binary,point_biserial,0.645803,0.212049,39997,2,"0.0:fraud_rate=0.027,n=26562; 1.0:fraud_rate=0.589,n=13435",,,retain,
@@ -21,8 +21,8 @@ card_present,binary,point_biserial,0.611088,0.162102,39997,2,"0.0:fraud_rate=0.1
 high_risk_merchant,binary,point_biserial,-9.1e-05,0.0,39997,2,"0.0:fraud_rate=0.215,n=30040; 1.0:fraud_rate=0.215,n=9957",,,exclude_low_association,
 weekend_transaction,binary,point_biserial,,0.0,39997,1,"0.0:fraud_rate=0.215,n=39997",,,exclude_constant,
 currency_imputed,binary,point_biserial,-0.006261,2e-05,39997,2,"0.0:fraud_rate=0.216,n=38600; 1.0:fraud_rate=0.202,n=1397",,,exclude_low_association,
-amount_usd_invalid,binary,point_biserial,-0.002393,3e-06,39997,2,"0.0:fraud_rate=0.215,n=39679; 1.0:fraud_rate=0.204,n=318",,,exclude_low_association,
-is_shared_device,binary,point_biserial,-0.377472,0.082909,39997,2,"0.0:fraud_rate=0.353,n=22336; 1.0:fraud_rate=0.041,n=17661",,customers_per_device_minmax,exclude_redundant,"spearman=1.000 with customers_per_device_minmax, which has higher mutual information."
+amount_usd_invalid,binary,point_biserial,0.009543,3.8e-05,39997,2,"0.0:fraud_rate=0.215,n=39996; 1.0:fraud_rate=1.000,n=1",,,exclude_low_association,
+is_shared_device,binary,point_biserial,0.258776,0.028329,39997,2,"0.0:fraud_rate=0.201,n=39275; 1.0:fraud_rate=1.000,n=722",1.0,,exclude_possible_target_leakage,These values/categories are always or never fraud (>= 100 rows).
 card_brand_visa,binary,point_biserial,0.00185,2e-06,39997,2,"0.0:fraud_rate=0.215,n=29914; 1.0:fraud_rate=0.217,n=10083",,,exclude_low_association,
 card_brand_mastercard,binary,point_biserial,-0.00083,0.0,39997,2,"0.0:fraud_rate=0.216,n=29997; 1.0:fraud_rate=0.215,n=10000",,,exclude_low_association,
 card_brand_amex,binary,point_biserial,0.000675,0.0,39997,2,"0.0:fraud_rate=0.215,n=30056; 1.0:fraud_rate=0.216,n=9941",,,exclude_low_association,

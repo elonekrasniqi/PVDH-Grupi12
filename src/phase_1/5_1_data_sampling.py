@@ -14,7 +14,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 
-DEFAULT_INPUT = ROOT / "dataset/phase_1/4F_INTEGRATED_DATASET.csv"
+DEFAULT_INPUT = ROOT / "dataset/phase_1/4A_INTEGRATED_DATASET.csv"
 DEFAULT_OUTPUT_DIR = ROOT / "dataset/phase_1"
 
 DEFAULT_FRACTION = 0.10

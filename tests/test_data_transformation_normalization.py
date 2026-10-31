@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "dataset" / "phase_1"
 
 spec = importlib.util.spec_from_file_location(
-    "data_transformation_normalization", ROOT / "src" / "phase_1" / "6_3_data_transformation_normalization.py")
+    "data_transformation_normalization", ROOT / "src" / "phase_1" / "8_1_data_transformation_normalization.py")
 transformation = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(transformation)
 
@@ -19,7 +19,7 @@ PERIODS = ["Night", "Morning", "Afternoon", "Evening"]
 
 
 def make_frame(n=120):
-    """A small 6B-like dataset (already discretized and binarized)."""
+    """A small 7A-like dataset (already discretized and binarized)."""
     rows = []
     for i in range(n):
         velocity = ("{'num_transactions': %d, 'total_amount': %f, 'unique_merchants': %d, "
@@ -55,10 +55,10 @@ class TestDataTransformationNormalization(unittest.TestCase):
     def setUpClass(cls):
         cls.tmp = tempfile.TemporaryDirectory()
         folder = Path(cls.tmp.name)
-        cls.input = folder / "6B.csv"
+        cls.input = folder / "7A.csv"
         cls.frame = make_frame()
         cls.frame.to_csv(cls.input, index=False)
-        cls.result, cls.report = transformation.run(cls.input, folder / "6D.csv", folder / "6E.csv")
+        cls.result, cls.report = transformation.run(cls.input, folder / "8A.csv", folder / "8B.csv")
 
     @classmethod
     def tearDownClass(cls):
@@ -154,7 +154,7 @@ class TestDataTransformationNormalization(unittest.TestCase):
 
 
 def real_outputs_available():
-    paths = [DATA / name for name in ("6B_DISCRETIZED_BINARIZED_DATASET.csv", "6D_TRANSFORMED_NORMALIZED_DATASET.csv")]
+    paths = [DATA / name for name in ("7A_DISCRETIZED_BINARIZED_DATASET.csv", "8A_TRANSFORMED_NORMALIZED_DATASET.csv")]
     if not all(path.exists() for path in paths):
         return False
     with paths[0].open(encoding="utf-8") as f:
@@ -166,8 +166,8 @@ class TestRealOutputs(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.discretized = pd.read_csv(DATA / "6B_DISCRETIZED_BINARIZED_DATASET.csv", dtype=str, keep_default_na=False)
-        cls.final = pd.read_csv(DATA / "6D_TRANSFORMED_NORMALIZED_DATASET.csv", low_memory=False)
+        cls.discretized = pd.read_csv(DATA / "7A_DISCRETIZED_BINARIZED_DATASET.csv", dtype=str, keep_default_na=False)
+        cls.final = pd.read_csv(DATA / "8A_TRANSFORMED_NORMALIZED_DATASET.csv", low_memory=False)
 
     def test_row_count_and_target_kept(self):
         self.assertEqual(len(self.final), len(self.discretized))

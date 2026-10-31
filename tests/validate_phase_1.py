@@ -1,21 +1,33 @@
-
 import csv
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "dataset/phase_1"
 
-INTEGRATED = DATA / "4F_INTEGRATED_DATASET.csv"
+DEDUPLICATED = DATA / "3B_DUPLICATES_REMOVED_DATASET.csv"
+INTEGRATED = DATA / "4A_INTEGRATED_DATASET.csv"
 
 AGGREGATED = [
-    "4A_AGGREGATED_BY_COUNTRY.csv",
-    "4B_AGGREGATED_BY_CURRENCY.csv",
-    "4C_AGGREGATED_BY_DATE.csv",
-    "4D_AGGREGATED_BY_MERCHANT_CATEGORY.csv"
+    "4B_AGGREGATED_BY_COUNTRY.csv",
+    "4C_AGGREGATED_BY_CURRENCY.csv",
+    "4D_AGGREGATED_BY_DATE.csv",
+    "4E_AGGREGATED_BY_MERCHANT_CATEGORY.csv"
 ]
 
 
+def count_source():
+    """Rows and fraud rows of the deduplicated dataset (input of task 4)."""
+    rows = fraud = unknown_currency = 0
+    with DEDUPLICATED.open(encoding="utf-8-sig", newline="") as f:
+        for row in csv.DictReader(f):
+            rows += 1
+            fraud += row["is_fraud"].strip().lower() in ("1", "true")
+            unknown_currency += row["currency"].strip().upper() == "UNKNOWN"
+    return rows, fraud, unknown_currency
+
+
 def main():
+    expected_total, expected_fraud, expected_imputed = count_source()
     total = 0
     fraud = 0
     imputed = 0
@@ -42,9 +54,9 @@ def main():
     print("Imputed currencies:", imputed)
     print("Missing USD amounts:", missing_usd)
 
-    assert total == 399972, "Unexpected transaction count"
-    assert fraud == 86166, "Unexpected fraud count"
-    assert imputed == 14827, "Unexpected imputation count"
+    assert total == expected_total, "Transactions lost or added during integration"
+    assert fraud == expected_fraud, "Fraud count changed during integration"
+    assert imputed == expected_imputed, "Not every unknown currency was imputed"
     assert missing_usd == 0, "Some USD amounts are missing"
 
     for name in AGGREGATED:

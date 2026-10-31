@@ -9,7 +9,7 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 INPUT_FILE = PROJECT_ROOT / "dataset" / "synthetic_fraud_data.csv"
 OUTPUT_DIR = PROJECT_ROOT / "dataset" / "phase_1"
-OUTPUT_FILE = OUTPUT_DIR / "1F_FORMAT_PROFILING_REPORT.csv"
+OUTPUT_FILE = OUTPUT_DIR / "1A_FORMAT_PROFILING_REPORT.csv"
 
 # 2. COLUMN CONFIGURATION
 # Boolean columns: values must be True or False.

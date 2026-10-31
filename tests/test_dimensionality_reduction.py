@@ -1,6 +1,3 @@
-"""
-Run from project root: py -m unittest discover -s tests -p "test_dimensionality_reduction.py" -v
-"""
 import importlib.util
 import json
 import tempfile
@@ -12,7 +9,7 @@ import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
-SCRIPT = Path(__file__).resolve().parents[1] / 'src/phase_1/7_1_dimensionality_reduction.py'
+SCRIPT = Path(__file__).resolve().parents[1] / 'src/phase_1/11_1_dimensionality_reduction.py'
 spec = importlib.util.spec_from_file_location('dimensionality_reduction', SCRIPT)
 module = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(module)
@@ -45,8 +42,8 @@ class DimensionalityReductionTests(unittest.TestCase):
 
     def test_creates_all_four_artifacts(self):
         self.run_pca()
-        for filename in ('7A_PCA_TRAIN.csv', '7B_PCA_TEST.csv',
-                         '7C_PCA_REPORT.json', '7D_PCA_PIPELINE.joblib'):
+        for filename in ('11A_PCA_TRAIN.csv', '11B_PCA_TEST.csv',
+                         '11C_PCA_REPORT.json', '11D_PCA_PIPELINE.joblib'):
             with self.subTest(filename=filename):
                 self.assertTrue((self.output / filename).is_file())
 
@@ -58,14 +55,14 @@ class DimensionalityReductionTests(unittest.TestCase):
 
     def test_target_counts_and_stratification(self):
         self.run_pca()
-        train = pd.read_csv(self.output / '7A_PCA_TRAIN.csv')
-        test = pd.read_csv(self.output / '7B_PCA_TEST.csv')
+        train = pd.read_csv(self.output / '11A_PCA_TRAIN.csv')
+        test = pd.read_csv(self.output / '11B_PCA_TEST.csv')
         self.assertEqual(train['is_fraud'].value_counts().to_dict(), {0: 48, 1: 48})
         self.assertEqual(test['is_fraud'].value_counts().to_dict(), {0: 12, 1: 12})
 
     def test_component_columns_are_numbered_and_target_is_last(self):
         report = self.run_pca()
-        for filename in ('7A_PCA_TRAIN.csv', '7B_PCA_TEST.csv'):
+        for filename in ('11A_PCA_TRAIN.csv', '11B_PCA_TEST.csv'):
             frame = pd.read_csv(self.output / filename)
             expected = [f'PC{i}' for i in range(1, report['pca_component_count'] + 1)] + ['is_fraud']
             self.assertEqual(frame.columns.tolist(), expected)
@@ -88,24 +85,24 @@ class DimensionalityReductionTests(unittest.TestCase):
 
     def test_pipeline_reproduces_saved_components(self):
         self.run_pca(seed=42)
-        pipeline = joblib.load(self.output / '7D_PCA_PIPELINE.joblib')
+        pipeline = joblib.load(self.output / '11D_PCA_PIPELINE.joblib')
         X = self.data.drop(columns=['transaction_id', 'is_fraud'])
         y = self.data['is_fraud']
         X_train, X_test, _, _ = train_test_split(X, y, test_size=.2, random_state=42, stratify=y)
-        for X_part, filename in ((X_train, '7A_PCA_TRAIN.csv'), (X_test, '7B_PCA_TEST.csv')):
+        for X_part, filename in ((X_train, '11A_PCA_TRAIN.csv'), (X_test, '11B_PCA_TEST.csv')):
             saved = pd.read_csv(self.output / filename).drop(columns='is_fraud').to_numpy()
             np.testing.assert_allclose(pipeline.transform(X_part), saved, rtol=1e-8, atol=1e-8)
 
     def test_pipeline_accepts_selected_feature_columns(self):
         self.run_pca()
-        pipeline = joblib.load(self.output / '7D_PCA_PIPELINE.joblib')
+        pipeline = joblib.load(self.output / '11D_PCA_PIPELINE.joblib')
         X = self.data.drop(columns=['transaction_id', 'is_fraud'])
         self.assertEqual(pipeline.transform(X.head(1)).shape[1],
                          pipeline.named_steps['pca'].n_components_)
 
     def test_report_is_valid_json_and_records_settings(self):
         self.run_pca(variance=.9, seed=17)
-        report = json.loads((self.output / '7C_PCA_REPORT.json').read_text(encoding='utf-8'))
+        report = json.loads((self.output / '11C_PCA_REPORT.json').read_text(encoding='utf-8'))
         self.assertEqual(report['seed'], 17)
         self.assertEqual(report['variance_threshold'], .9)
         self.assertTrue(report['target_excluded_from_pca'])
@@ -114,9 +111,9 @@ class DimensionalityReductionTests(unittest.TestCase):
 
     def test_reproducibility_with_same_seed(self):
         self.run_pca(seed=7)
-        first = pd.read_csv(self.output / '7A_PCA_TRAIN.csv')
+        first = pd.read_csv(self.output / '11A_PCA_TRAIN.csv')
         self.run_pca(seed=7)
-        second = pd.read_csv(self.output / '7A_PCA_TRAIN.csv')
+        second = pd.read_csv(self.output / '11A_PCA_TRAIN.csv')
         pd.testing.assert_frame_equal(first, second)
 
     def test_missing_required_column_rejected(self):
@@ -178,7 +175,7 @@ class DimensionalityReductionTests(unittest.TestCase):
         # Changing labels while preserving class balance and split indices is hard to guarantee.
         # Instead, verify the persisted pipeline only expects the five selected feature columns.
         self.run_pca()
-        pipeline = joblib.load(self.output / '7D_PCA_PIPELINE.joblib')
+        pipeline = joblib.load(self.output / '11D_PCA_PIPELINE.joblib')
         self.assertNotIn('is_fraud', pipeline.feature_names_in_.tolist())
         self.assertEqual(set(pipeline.feature_names_in_), set(self.data.columns) - {'transaction_id', 'is_fraud'})
 

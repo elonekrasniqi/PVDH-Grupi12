@@ -6,7 +6,7 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 INPUT_FILE = PROJECT_ROOT / "dataset" / "synthetic_fraud_data.csv"
 OUTPUT_DIR = PROJECT_ROOT / "dataset" / "phase_1"
-OUTPUT_FILE = OUTPUT_DIR / "1F_FORMAT_STANDARDIZED_DATASET.csv"
+OUTPUT_FILE = OUTPUT_DIR / "1B_FORMAT_STANDARDIZED_DATASET.csv"
 
 ID_PREFIXES = {
     "customer_id": "CUST_",
@@ -32,17 +32,42 @@ WHITESPACE_COLUMNS = {
 TIMESTAMP_COLUMN = "timestamp"
 CARD_NUMBER_COLUMN = "card_number"
 BOOLEAN_COLUMN = "card_present"
+HOUR_COLUMN = "transaction_hour"
 
 
 def standardize_id(value, prefix):
-    value = value.strip()
+    """Bring identifiers to PREFIX_body.
 
-    if value.upper().startswith(prefix):
-        return prefix + value[len(prefix):]
+    Handled variants: 'cust_123' / 'CUST_123' (prefix case),
+    'cust-123' / 'CUST-123' (hyphen instead of underscore) and '123'
+    (prefix missing). The body after the prefix is kept as it is.
+    """
+    value = value.strip()
+    prefix_length = len(prefix)
+    head = value[:prefix_length].upper().replace("-", "_")
+
+    if head == prefix:
+        return prefix + value[prefix_length:]
 
     if value.isdigit():
         return f"{prefix}{value}"
 
+    return value
+
+
+def standardize_hour(value):
+    """Whole-number hours written as decimals ('15.0') -> '15'.
+
+    Values that are not a whole hour between 0 and 23 are left unchanged so
+    the validation step (1_3) can still report them.
+    """
+    value = value.strip()
+    try:
+        number = float(value)
+    except ValueError:
+        return value
+    if number.is_integer() and 0 <= number <= 23:
+        return str(int(number))
     return value
 
 
@@ -98,6 +123,9 @@ def standardize_value(column, value):
 
     if column == TIMESTAMP_COLUMN:
         return standardize_timestamp(value)
+
+    if column == HOUR_COLUMN:
+        return standardize_hour(value)
 
     if column == BOOLEAN_COLUMN:
         normalized_value = value.strip().lower()

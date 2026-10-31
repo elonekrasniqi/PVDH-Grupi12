@@ -1,4 +1,3 @@
-
 """Data type definition and validation for Phase I preprocessing.
 
 Reads the original fraud dataset and generates a column-level report.
@@ -27,7 +26,7 @@ INPUT_FILE = (
 OUTPUT_DIR = PROJECT_ROOT / "dataset" / "phase_1"
 
 OUTPUT_FILE = (
-    OUTPUT_DIR / "1G_DATA_TYPE_REPORT.csv"
+    OUTPUT_DIR / "1C_DATA_TYPE_REPORT.csv"
 )
 
 
@@ -84,6 +83,7 @@ MISSING_VALUES = {
     "nan",
     "na",
     "n/a",
+    "?",
 }
 
 REPORT_COLUMNS = [

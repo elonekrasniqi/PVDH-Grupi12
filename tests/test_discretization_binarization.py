@@ -9,7 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "dataset" / "phase_1"
 
 spec = importlib.util.spec_from_file_location(
-    "discretization_binarization", ROOT / "src" / "phase_1" / "6_2_discretization_binarization.py")
+    "discretization_binarization", ROOT / "src" / "phase_1" / "7_1_discretization_binarization.py")
 discretization = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(discretization)
 
@@ -125,7 +125,7 @@ class TestDiscretizationBinarization(unittest.TestCase):
 
 
 def real_outputs_available():
-    paths = [DATA / name for name in ("6A_FEATURE_CREATION_DATASET.csv", "6B_DISCRETIZED_BINARIZED_DATASET.csv")]
+    paths = [DATA / name for name in ("6A_FEATURE_CREATION_DATASET.csv", "7A_DISCRETIZED_BINARIZED_DATASET.csv")]
     if not all(path.exists() for path in paths):
         return False
     with paths[0].open(encoding="utf-8") as f:
@@ -139,7 +139,7 @@ class TestRealOutputs(unittest.TestCase):
     def setUpClass(cls):
         read = lambda name: pd.read_csv(DATA / name, dtype=str, keep_default_na=False)
         cls.created = read("6A_FEATURE_CREATION_DATASET.csv")
-        cls.final = read("6B_DISCRETIZED_BINARIZED_DATASET.csv")
+        cls.final = read("7A_DISCRETIZED_BINARIZED_DATASET.csv")
 
     def test_row_count_matches(self):
         self.assertEqual(len(self.final), len(self.created))
