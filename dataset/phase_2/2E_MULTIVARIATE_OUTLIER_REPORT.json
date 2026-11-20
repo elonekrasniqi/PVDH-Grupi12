@@ -1,0 +1,28 @@
+{
+  "input_rows": 39997,
+  "features": [
+    "amount_usd_log_z",
+    "customer_avg_amount_usd_log_z",
+    "velocity_total_amount_log_z",
+    "customer_txn_count_z",
+    "velocity_num_transactions_z",
+    "velocity_max_single_amount_z",
+    "velocity_unique_merchants_z",
+    "velocity_unique_countries_z",
+    "customer_away_share_minmax",
+    "customer_night_share_minmax",
+    "customers_per_device_minmax",
+    "hour_sin",
+    "hour_cos"
+  ],
+  "contamination_assumption": 0.05,
+  "lof_neighbors": 20,
+  "isolation_forest_outliers": 2000,
+  "lof_outliers": 2000,
+  "both_methods_outliers": 301,
+  "note": "Outlier flags are unsupervised anomaly indicators, not fraud predictions.",
+  "isolation_forest_fraud_count_among_outliers": 691,
+  "isolation_forest_fraud_rate_among_outliers": 0.3455,
+  "lof_fraud_count_among_outliers": 693,
+  "lof_fraud_rate_among_outliers": 0.3465
+}
