@@ -29,7 +29,7 @@ Ky dokument paraqet ndarjen e detyrave për fazën e dytë: detektimin e përjas
 
 | Task | Assigned To | Finished |
 | --- | --- | --- |
-| Univariate outlier detection (Z-score, IQR) | F | [ ] |
+| Univariate outlier detection (Z-score, IQR) | F | [x] |
 | Multivariate outlier detection (Isolation Forest, LOF) | E | [x] |
 | Handling incorrect detections and outlier treatment | B | [ ] |
 | Summary statistics | F | [ ] |
