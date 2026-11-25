@@ -1,0 +1,7 @@
+model,training_data,precision,recall,f1,pr_auc,true_positives,false_negatives,false_positives,true_negatives
+Logistic regression,No oversampling,0.7758,0.7551,0.7653,0.8289,1301,422,376,5901
+Logistic regression,ADASYN 0.5,0.7303,0.8456,0.7838,0.8246,1457,266,538,5739
+Logistic regression,ADASYN 1.0,0.5552,0.9362,0.6971,0.7948,1613,110,1292,4985
+Random forest,No oversampling,0.8603,0.8149,0.837,0.9214,1404,319,228,6049
+Random forest,ADASYN 0.5,0.7741,0.877,0.8223,0.9122,1511,212,441,5836
+Random forest,ADASYN 1.0,0.7172,0.9054,0.8004,0.8884,1560,163,615,5662
