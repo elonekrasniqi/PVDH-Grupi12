@@ -1,0 +1,7 @@
+model,training_data,precision,recall,f1,pr_auc,true_positives,false_negatives,false_positives,true_negatives
+Logistic regression,No oversampling,0.7758,0.7551,0.7653,0.8289,1301,422,376,5901
+Logistic regression,SMOTE 0.5,0.7603,0.8375,0.797,0.8271,1443,280,455,5822
+Logistic regression,SMOTE 1.0,0.659,0.8804,0.7538,0.8257,1517,206,785,5492
+Random forest,No oversampling,0.8591,0.8137,0.8358,0.9224,1402,321,230,6047
+Random forest,SMOTE 0.5,0.8294,0.8439,0.8366,0.9171,1454,269,299,5978
+Random forest,SMOTE 1.0,0.7935,0.87,0.83,0.9124,1499,224,390,5887
