@@ -31,7 +31,7 @@ Ky dokument paraqet ndarjen e detyrave për fazën e dytë: detektimin e përjas
 | --- | --- | --- |
 | Univariate outlier detection (Z-score, IQR) | F | [x] |
 | Multivariate outlier detection (Isolation Forest, LOF) | E | [x] |
-| Handling incorrect detections and outlier treatment | B | [ ] |
+| Handling incorrect detections and outlier treatment | B | [x] |
 | Summary statistics | F | [ ] |
 | Multivariate data exploration | B | [ ] |
 | README documentation | E | [ ] |
